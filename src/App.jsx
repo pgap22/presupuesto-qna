@@ -3,10 +3,10 @@ import { Plus, Trash2, PieChart, Settings } from 'lucide-react';
 import { useLocalStorage } from 'usehooks-ts';
 
 const DEFAULT_CATEGORIAS = [
-  // { id: '1', nombre: 'Ahorro obligatorio', porcentaje: 0.20 },
-  // { id: '2', nombre: 'Ahorro Compra', porcentaje: 0.40 },
-  // { id: '3', nombre: 'Ahorro emergencia', porcentaje: 0.10 },
-  // { id: '4', nombre: 'Gasto libre', porcentaje: 0.30 },
+  { id: '1', nombre: 'Ahorro obligatorio', porcentaje: 0.20 },
+  { id: '2', nombre: 'Ahorro Compra', porcentaje: 0.40 },
+  { id: '3', nombre: 'Ahorro emergencia', porcentaje: 0.10 },
+  { id: '4', nombre: 'Gasto libre', porcentaje: 0.30 },
 ];
 
 const formatCurrency = (value) => {
@@ -19,6 +19,7 @@ function DistribucionTab({ categorias, setCategorias }) {
 
   const handleIngresoKeyDown = (e) => {
     e.preventDefault();
+    console.log(e.key)
     if (e.key >= '0' && e.key <= '9') {
       if (ingreso > 999999999) return;
       const digit = parseInt(e.key, 10);
@@ -45,7 +46,7 @@ function DistribucionTab({ categorias, setCategorias }) {
   
   const ingresoNumerico = ingreso / 100;
   const totalPorcentaje = categorias.reduce((acc, cat) => acc + cat.porcentaje, 0);
-  const displayIngreso = `$${ingresoNumerico.toFixed(2)}`;
+  const displayIngreso = `${ingresoNumerico.toFixed(2)}`;
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -58,13 +59,13 @@ function DistribucionTab({ categorias, setCategorias }) {
         </div>
         <div className="relative">
           <input
-            className="w-full h-14 px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right font-mono text-xl shadow-sm transition-all"
+            className="w-full b h-14 px-4 py-3 pl-7 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-xl shadow-sm transition-all"
             value={displayIngreso}
+            type='number'
             onKeyDown={handleIngresoKeyDown}
-            readOnly
           />
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <span className="text-gray-400 text-xl">$</span>
+            <span className="text-black text-xl">$</span>
           </div>
         </div>
       </div>
